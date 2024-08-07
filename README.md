@@ -1,0 +1,2 @@
+# algorithmTest
+🧄法
