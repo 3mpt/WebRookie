@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 树的结构 */
+        class Node {
+            constructor(key) {
+                this.key = key // 节点值
+                this.left = null // 左节点
+                this.right = null // 右节点
+            }
+        }
+        // 定义枚举
+        const COMPARE = {
+            better: 1,
+            lower: -1,
+            equal: 0
+
+        }
+        const calcFn = (node, key) => {
+            if (key === node) {
+                return COMPARE.equal
+            } else {
+                return key > node ? COMPARE.better : COMPARE.lower
+            }
+
+        }
+        class BTS {
+            constructor() {
+                this.root = null // 根节点
+            }
+
+            insert(key) {
+                console.log(key)
+                // 如果root为空
+                if (this.root === null) {
+                    this.root = new Node(key)
+                } else {
+                    this.insertNode(this.root, key)
+                }
+            }
+            insertNode(node, key) {
+                if (calcFn(node, key) === COMPARE.lower) {
+                    // 如果节点左边为空，说明到头了
+                    if (node.left === null) {
+                        // 插入节点
+                        node.left = new Node(key)
+                    } else {
+                        // 递归接着调用
+                        this.insertNode(node.left, key)
+                    }
+                } else {
+                    if (node.right === null) {
+                        // 插入节点
+                        node.right = new Node(key)
+                    } else {
+                        // 递归接着调用
+                        this.insertNode(node.right, key)
+                    }
+                }
+            }
+        }
+
+        const bts1 = new BTS()
+
+        bts1.insert(23)
+        bts1.insert(21)
+        bts1.insert(20)
+        bts1.insert(24)
+        console.log(bts1);
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+# System
+.DS_Store
+
+# IDEA
+.vscode
+.idea
+
+# packages
+package-lock.json
+node_modules
+bower_components
+
+# build
+dist
+
+# tmp
+uploads
+
+# logs
+logs
+*.log
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+*.DS_Store
+
+#deploy
+deploy
+
+proxy.conf
