@@ -10,7 +10,7 @@ Function.prototype.myCall = function (context, ...args) {
     const result = context[fn](...args)
     delete context[fn]
     return result
-}
+}   
 const test = {
     name: "xxx",
     hello: function () {
@@ -26,3 +26,4 @@ test.hello.myCall(obj); //hello,world!
 // console.log(test.add.myCall(null, 1, 2));//3
 // console.log(test.add.call(null, 1, 2));//3
 
+console.log('@@', 1)
