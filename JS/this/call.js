@@ -1,3 +1,9 @@
+/**
+ *
+ * 手写call函数
+ * 1.先判断调用者是不是一个函数，如果不是抛出错误
+ * 2
+ */
 Function.prototype.myCall = function (context, ...args) {
     if (typeof this !== "function") {
         throw new Error('错误')
