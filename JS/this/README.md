@@ -3,6 +3,7 @@
 this 指向是面试中老生常谈的问题
 其中有三种办法改变 this 指向
 核心是将原函数（this）绑定到 context 对象上，并通过 context[fn] 调用它，这样调用时 this 会指向 context
+
 ## 1.bind
 
 bind 接受任意个参数，第一个参数是一个对象，Function 的调用者会指向这个对象，如果不传则指向全局 Windows
