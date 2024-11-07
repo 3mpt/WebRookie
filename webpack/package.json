@@ -24,6 +24,7 @@
     "less-loader": "^12.2.0",
     "mini-css-extract-plugin": "^2.9.2",
     "postcss-loader": "^8.1.1",
+    "progress-bar-webpack-plugin": "^2.1.0",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.10",
     "vue-loader": "^17.4.2",
@@ -36,6 +37,8 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@vue/compiler-sfc": "^3.5.12",
-    "vue": "^3.5.12"
+    "speed-measure-webpack-plugin": "^1.5.0",
+    "vue": "^3.5.12",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }

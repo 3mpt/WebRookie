@@ -3,9 +3,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const { VueLoaderPlugin } = require('vue-loader')
-const Webpack = require('webpack')
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin")
+const chalk = require('chalk')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const devMode = process.argv.indexOf('--mode=production') === -1
+const smp = new SpeedMeasurePlugin()
 module.exports = {
+
     // 开发模式
     mode: 'development',
     // 入口文件 多入口
@@ -43,6 +48,11 @@ module.exports = {
         }),
         // vue
         new VueLoaderPlugin(),
+        // new BundleAnalyzerPlugin()
+        // 进度条
+        new ProgressBarPlugin({
+            format: `  :msg [:bar] ${chalk.green.bold(':percent')} (:elapsed s)`
+        })
     ],
     module: {
         rules: [
@@ -153,5 +163,6 @@ module.exports = {
             ' @': path.resolve(__dirname, '../src')
         },
         extensions: ['.js', '.json', '.vue']
-    }
+    },
+
 }
