@@ -1,3 +1,6 @@
 import './assets/index.css'
 import './assets/index.less'
-console.log('💩yes')
+import { createApp } from 'vue';
+import App from './App.vue';
+
+createApp(App).mount('#app');
