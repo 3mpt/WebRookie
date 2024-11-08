@@ -6,28 +6,37 @@
     optimize-css-assets-webpack-plugin已废弃使用css-minimizer-webpack-plugin压缩css
     uglifyjs-webpack-plugin已废弃使用terser-webpack-plugin 压缩js
 */
-const path = require('path')
 const webpackConfig = require('./webpack.config')
-const WebpackMerge = require("webpack-merge")
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { merge } = require("webpack-merge")
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const chalk = require('chalk')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-module.exports = WebpackMerge(webpackConfig, {
+module.exports = merge(webpackConfig, {
     mode: 'production',
-    plugin: [
-        new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, '../public'),
-            to: path.resolve(__dirname, '../dist')
-        }])
+    devtool: 'source-map',  // 设置生成 source map
+    plugins: [
+        new ProgressBarPlugin({
+            format: chalk.yellow(
+              '打包中 [:bar] :current/:total :percent :elapseds :msg'
+            ),
+            complete: '●',
+            incomplete: '○',
+            width: 20
+          })
     ],
     optimization: {
         minimizer: [
             new TerserPlugin({
-                cache: true,         // 启用缓存，提高构建速度
                 parallel: true,     // 启用多进程并行处理
-                sourceMap: true,    // 生成 SourceMap，用于调试
+                terserOptions: {     // 可以添加额外的 terser 配置选项
+                    format: {
+                        comments: false,  // 移除注释
+                    },
+                },
+                extractComments: false, // 不生成额外的注释文件
             }),
-            new CssMinimizerPlugin({})
+            new CssMinimizerPlugin()
         ],
         splitChunks:{
             chunks:'all',

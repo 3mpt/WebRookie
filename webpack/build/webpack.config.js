@@ -4,8 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const { VueLoaderPlugin } = require('vue-loader')
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin")
-const chalk = require('chalk')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const devMode = process.argv.indexOf('--mode=production') === -1
 const smp = new SpeedMeasurePlugin()
@@ -23,7 +21,8 @@ module.exports = {
         filename: 'js/[name].[hash:8].js',
         // 打包后的文件路径
         path: path.resolve(__dirname, '../dist'),
-        chunkFilename: "js/[name].[hash8].js"
+        chunkFilename: "js/[name].[hash8].js",
+        // clean: true
     },
     plugins: [
         // 打包生成的js文件自动引入到HTML中
@@ -31,13 +30,13 @@ module.exports = {
             template: path.resolve(__dirname, '../public/index.html'),
             filename: 'index.html',
             // 与入口文件对应的模块名
-            chunks: ['main']
+            chunks: ['main'],
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../public/header.html'),
             filename: 'header.html',
             // 与入口文件对应的模块名
-            chunks: ['header']
+            chunks: ['header'],
         }),
         // 清除之前的打包产物
         new CleanWebpackPlugin(),
@@ -50,9 +49,6 @@ module.exports = {
         new VueLoaderPlugin(),
         // new BundleAnalyzerPlugin()
         // 进度条
-        new ProgressBarPlugin({
-            format: `  :msg [:bar] ${chalk.green.bold(':percent')} (:elapsed s)`
-        })
     ],
     module: {
         rules: [
